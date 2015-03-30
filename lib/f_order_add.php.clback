@@ -1,0 +1,34 @@
+<?php
+session_start();
+require_once("../includes/config.php");
+require_once("../includes/conn.php");
+
+
+if(!empty($_POST['ddate']) && $_POST['ddate']!=''){
+	$bdateArr = explode('.',$_POST['ddate']);
+	$ddate=$bdateArr[2].'-'.$bdateArr[1].'-'.$bdateArr[0];
+}
+
+if(!empty($_POST['adate']) && $_POST['adate']!=''){
+	$pdateArr = explode('.',$_POST['adate']);
+	$adate=$pdateArr[2].'-'.$pdateArr[1].'-'.$pdateArr[0];
+}
+
+
+
+$query="INSERT INTO contracts (customer_id, contractDate, )
+VALUES ('".$_POST['cid']."','".$ddate."',  '".$_POST['surname']."','".$born."',
+'".$_POST['pser']."', '".$_POST['pnum']."', '".$_POST['pkod']."', '".$pdate."', '".$_POST['authority']."',
+'".$_POST['bplace']."', '".$_POST['adrRegion']."', '".$_POST['adrZone']."', '".$_POST['adrCity']."',
+'".$_POST['adrStreet']."', '".$_POST['adrHouse']."', '".$_POST['adrFlat']."', '".$_POST['telmobil']."',
+'".$_POST['note']."', '".$_SESSION['uid']."',
+'".$_POST['email']."', '".$_POST['icq']."')";
+
+
+$result=mysql_query($query);
+$i = mysql_insert_id();
+$err=0;
+
+header('Location:'.$path.'index.php?page=3&cnid='.$i.'&err='.$err);
+
+?>
